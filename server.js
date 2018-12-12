@@ -1,5 +1,5 @@
 const axios = require("axios");
-const secrets = require('./config');
+const secrets = require("./config");
 
 let baseUrl = "https://api.themoviedb.org/3/discover/movie";
 let key = secrets.apiKey();
@@ -7,7 +7,7 @@ let key = secrets.apiKey();
 let counter = 1;
 let movieBank = [];
 
-async function getData() {
+function getData() {
   if (counter !== 6) {
     axios
       .get(
@@ -25,12 +25,12 @@ async function getData() {
       .catch(error => {
         console.log(error);
       });
+  } else {
+    cleanData(movieBank)
   }
-  console.log(movieBank);
 }
 
 function cleanData(data) {
-
   var output = [];
 
   for (var i = 0; i < data.length; i++) {
@@ -41,13 +41,11 @@ function cleanData(data) {
       output.push(values);
     }
   }
-  console.log("output:" + output);
   return output;
 }
 
-getData();
 
-console.log('cleanest: ' + cleanData(movieBank))
+console.log(getData());
 
 // var mysql = require("mysql");
 
